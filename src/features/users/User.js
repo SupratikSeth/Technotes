@@ -1,12 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { memo } from "react";
 
-import { useSelector } from "react-redux";
-import { selectUserById } from "./usersApiSlice";
+import { useGetUsersQuery } from "./usersApiSlice";
 
 const User = ({ userId }) => {
-    const user = useSelector(state => selectUserById(state, userId));
+    //Here unlike useSelector() it will not make a seperate network request for notes and will get the notes from the already fetched notes hence is more optimized
+    const { user } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            user: data?.entities[userId]
+        }),
+    })
+
     const navigate = useNavigate();
 
     if(user){
@@ -34,4 +40,5 @@ const User = ({ userId }) => {
         return null;
 }
 
-export default User
+const memoizedUser = memo(User)
+export default memoizedUser //this component will only rerender if there is change to the data

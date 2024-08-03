@@ -4,10 +4,13 @@ import { useNavigate, Link } from "react-router-dom"
 import { useLoginMutation } from "./authApiSlice"
 import { setCredentials } from "./authSlice"
 import { useDispatch } from "react-redux"
+import { PulseLoader } from "react-spinners"
+import useTitle from "../../hooks/useTitle"
 
 import usePersist from "../../hooks/usePersist"
 
 const Login = () => {
+    useTitle('Login Page')
     const userRef = useRef();
     const errRef = useRef();
 
@@ -58,7 +61,7 @@ const Login = () => {
     const errorClass = errMsg ? 'errMsg' : 'offscreen'
 
     if (isLoading) {
-        return <p>Loading...</p>
+        return <PulseLoader color={"#FFF"} />
     }
 
     const content = (

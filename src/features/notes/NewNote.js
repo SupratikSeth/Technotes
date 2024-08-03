@@ -1,19 +1,22 @@
-import { selectAllUsers } from "../users/usersApiSlice"
-import { useSelector } from "react-redux"
 import NewNoteForm from "./NewNoteForm"
+import { useGetUsersQuery } from "../users/usersApiSlice"
+import { PulseLoader } from "react-spinners"
+import useTitle from "../../hooks/useTitle"
 
 const NewNote = () => {
-    const users = useSelector(selectAllUsers)
+    useTitle('New Note')
+    const { users } = useGetUsersQuery("usersList", {
+        selectFromResult: ({ data }) => ({
+            users: data?.ids.map(id => data?.entities[id])
+        }),
+    })
 
     let content
 
     if (!users?.length)
-        content = <p>Not Currently Available</p>
-    else {
-
-        /* const content = users ? <NewNoteForm users={users} /> : <p>Loading...</p> */
+        content =  <PulseLoader color={"#FFF"} />
+    else
         content = <NewNoteForm users={users} />
-    }
 
     return (
         <div className="newNote">
