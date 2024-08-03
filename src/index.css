@@ -1,13 +1,328 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.errMsg {
+    display: inline-block;
+    background-color: #fff;
+    color: firebrick;
+    padding: 0.5rem;
+}
+.errMsg a{
+    color: firebrick;
+    text-decoration: underline;
+}
+
+.offscreen{
+    position: absolute;
+    left: -99999px;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    background-color: #0F172A;
+    color: whitesmoke;
+    background-image: url('img/background.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-blend-mode: multiply;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1rem;
+
+}
+
+section h1 {
+    margin-bottom: 1rem;
+}
+
+section header {
+    border-bottom: 2px solid white;
+}
+
+section main {
+    margin-top: 1rem;
+    flex-grow: 1;
+}
+
+section main p {
+    margin-bottom: 1.5rem;
+}
+
+section footer {
+    border-top: 2px solid white;
+}
+
+section footer a {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.welcome {
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
+}
+
+.welcome p {
+    margin: 1rem 0;
+    font-size: large;
+}
+
+.welcome p:nth-child(2) {
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.welcome a::before {
+    content: "→  ";
+    font-size: 1.3rem;
+}
+
+.dashHeader {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #0F172A; */
+}
+
+.dashFooter {
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+    /* position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background-color: #0F172A; */
+}
+
+.dashFooter button {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    color: whitesmoke;
+    border: none;
+    font-size: 1.7rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+.dashFooter button:hover{
+    transform: scale(1.2);
+}
+
+.notesList, .usersList, .newUserForm, .editUser, .newNote, .editNote {
+    flex-grow: 1;
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
+    padding: 1rem;
+}
+
+.newUserForm .header, .editUser .header, .newNote .header, .editNote .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+.newUserForm .header button, .editUser .header button, .newNote .header button, .editNote .header button, .logout-btn, .header-btn {
+    margin-right: 1rem;
+    background-color: transparent;
+    color: whitesmoke;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.newUserForm label, .editUser label, .newNote label, .editNote label, .login label{
+    display: block;
+    margin-bottom: 10px;
+}
+.editUser .activeLabel, .editNote .completeLabel{
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+.newUserForm input, .newUserForm select, .editUser input, .editUser select, .newNote input, .newNote textarea, .newNote select, .editNote input, .editNote textarea, .editNote select, .login input, .login-btn{
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    padding: 7px;
+    border-radius: 15px;
+    border: none;
+    width: 100%;
+}
+.newNote textarea, .editNote textarea{
+    height: 10rem;
+}
+.editUser .activeInput, .editNote .completeInput{
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+}
+.newUserForm select, .editUser select, .newNote select, .editNote select{
+    border-radius: 0;
+    font-size: 1.3rem;
+    overflow-y: hidden;
+    width: auto;
+}
+
+.newUserForm .invalidInput, .editUser .invalidInput{
+    border: 3px solid red;
+}
+
+button[disabled]{
+    visibility: hidden;
+}
+
+.newUserForm button:hover, .editUser button:hover, .newNote button:hover, .editNote button:hover, .logout-btn:hover, .header-btn:hover{
+    transform: scale(1.2);
+}
+
+.login .trustLabel .trustInput{
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    margin-right: 10px;
+}
+
+
+/* TABLE STYLING */
+
+thead,
+tbody,
+tr {
+    display: contents;
+}
+
+table {
+    font-size: 1rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    color: #000;
+    gap: 0.1rem;
+}
+
+table th {
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+table th,
+table td {
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+table tbody td:last-child {
+    display: grid;
+    place-content: center;
+    padding: 0;
+}
+
+table tbody button {
+    font-size: 1.5rem;
+    padding: 0.5em;
+    color: #000;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+table tbody button:hover {
+    font-size: 1.9rem;
+}
+
+
+.inactive {
+    background-color: grey;
+}
+
+
+/* NOTES TABLE */
+
+.noteCreated,
+.noteUpdated,
+.noteUsername {
+    display: none;
+}
+
+.completed {
+    color: rgb(0, 187, 0);
+    font-weight: bold;
+}
+
+.open {
+    color: firebrick;
+    font-weight: bold;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 420px) {
+    .dashHeader, .dashFooter{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav{
+        width: 100%;
+    }
+    .logout-btn{
+        float: right;
+    }
+}
+@media screen and (min-width: 770px) {
+    table {
+        font-size: 1.5rem;
+    }
+
+    table th {
+        font-size: 1.7rem;
+    }
+
+    .notesTable {
+        grid-template-columns: repeat(3, 1fr) 2fr repeat(2, 1fr);
+    }
+
+    .noteCreated,
+    .noteUpdated,
+    .noteUsername {
+        display: block;
+    }
+
+    .newUserForm input, .editUser input, .newNote input, .newNote textarea, .editNote input, .editNote textarea, .login input, .login-btn{
+        width: 700px;
+        display: block;
+    }
+
+    .editUser .activeLabel, .editUser .activeInput, .editNote .completeLabel, .editNote .completeInput, .login .trustLabel .trustInput{
+        display: inline-block;
+    }
 }
